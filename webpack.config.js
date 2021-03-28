@@ -8,11 +8,15 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
   mode: "development",
   entry: {
-    main: "./app.js"
+    main: "./src/app.js"
   },
   output: {
     path: path.resolve("./dist"), // resolve 함수는 절대경로를 지정해주는 함수이다.
     filename: "[name].js"
+  },
+  devServer: {
+    overlay: true,
+    stats: "errors-only"
   },
   module: {
     rules: [
