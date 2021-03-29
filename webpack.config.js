@@ -4,6 +4,7 @@ const childProcess = require("child_process"); // 터미널 명령어를 실행�
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const apiMocker = require("connect-api-mocker");
 
 module.exports = {
   mode: "development",
@@ -16,7 +17,10 @@ module.exports = {
   },
   devServer: {
     overlay: true,
-    stats: "errors-only"
+    stats: "errors-only",
+    before: app => {
+      app.use(apiMocker("/api", "mocks/api"));
+    }
   },
   module: {
     rules: [

@@ -1,8 +1,14 @@
-import "./app.css";
-import moon from "./moon.jpg";
+// import "./app.css";
+// import moon from "./moon.jpg";
+import axios from "axios";
 
-document.addEventListener("DOMContentLoaded", () => {
-  document.body.innerHTML = `
-        <img src="${moon}" />
-    `;
+document.addEventListener("DOMContentLoaded", async () => {
+  const res = await axios.get("/api/users");
+  console.log(res);
+
+  document.body.innerHTML = (res.data || [])
+    .map((user) => {
+      return `<div>${user.id}: ${user.name}</div>`;
+    })
+    .join("");
 });
